@@ -1,30 +1,32 @@
 import random
+import tkinter
+
+max_size = 9
 def is_correct(number):
-    t = True
-    for i in range(len(number)):
-        if number.rfind(str(number[i])) != i:
-            t = False
-    return t
+    if len(number) == 1:
+        return True
+    if number[0] == number[1]:
+        return False
+    return len(set(number)) == len(number)
 def make_secret(n):
-    s = str(random.randint(1,9))
+    s = str(random.randint(1, max_size))
     for i in range(n - 1):
-        s = s + str(random.randint(0,9))
+        s = s + str(random.randint(0,max_size))
     while not is_correct(s):
-        s = str(random.randint(1, 9))
+        s = str(random.randint(1, max_size))
         for i in range(n - 1):
-            s = s + str(random.randint(0, 9))
+            s = s + str(random.randint(0, max_size))
     return s
-def count_of_animals(secret, number):
+def count_of_animals(secret, number: str):
     if not is_correct(number):
-        print('It is not correct number')
-        return False
+        raise Exception('It is not correct number')
     if len(secret) != len(number):
-        print('It is not correct number')
-        return False
-    num_bulls = 0
-    for i in range(len(secret)):
-        if secret[i] == number[i]:
-            num_bulls += 1
+        raise Exception('It is not correct number')
+    try:
+        int(number)
+    except:
+        raise Exception('It is not correct number')
+    num_bulls = sum([1 for i in range(len(secret)) if secret[i] == number[i] ])
     num_cows = 0 - num_bulls
     for i in range(len(secret)):
         if number.find(str(secret[i])) != -1:
@@ -36,16 +38,17 @@ def count_of_animals(secret, number):
     else:
         return False
 def Game():
-    messagebox.showinfo("Description: game", "You will be work with console")
+    tkinter.messagebox.showinfo("Description: game", "You will be work with console")
     print('what is your name?')
     name = input()
     print('How much digits will be in numbers?')
     n = int(input())
-    while n > 9:
+    while n > max_size:
         print("It is too big, make new")
         n = int(input())
     secret = make_secret(n)
     print('i made a number, what do you think?')
+    #print(secret)
     number = input()
     iter = 1
     while not count_of_animals(secret, number):

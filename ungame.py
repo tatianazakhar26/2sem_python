@@ -1,26 +1,24 @@
 import random
 import time
 from tkinter import messagebox
-def is_correct(number):
+
+def is_correct(number: int) -> bool:
+    if len(number) == 1:
+        return True
     if number[0] == number[1]:
         return False
-    if len(set(number)) == len(number):
-        return True
-    else:
-        return False
+    return len(set(number)) == len(number)
 def first(n):
     if n == 1:
         return 1
     fst = 10
     for i in range(2, n):
-        fst *= 10
-        fst += i
+        fst = 10 * fst + i
     return fst
 def last(n):
     lst = 0
     for i in range(9, 9 - n, -1):
-        lst *= 10
-        lst += i
+        lst = 10 * lst + i
     return lst
 def gen(bulls, cows, number, *sol):
     for secret in sol:
@@ -36,14 +34,10 @@ def gen(bulls, cows, number, *sol):
             yield secret
 def ungame():
     messagebox.showinfo("Description: ungame", "You will be work with console")
-    print('How much digits will be in numbers?')
+    print('How much digits will be in number?')
     n = int(input())
     while n > 9 or n <= 0:
         print("It is too big, make new")
-        n = int(input())
-    if (n > 5):
-        print("i can't work fast with this number, you can change choice")
-        print('What is your number?')
         n = int(input())
     #t = time.time()
     sol = []
@@ -66,4 +60,3 @@ def ungame():
         print("Error")
     else:
         print('Your secret is {}'.format(sol[0]))
-
