@@ -6,7 +6,9 @@ class Heap:
         self.heap_ = []
 
     def game(self):
-        name, record = game2.Game()
+        game_ = game2.Game()
+        record = game_.attempt
+        name = game_.name
         heapq.heappush(self.heap_, (-record, name))
         if len(self.heap_) > 10:
             heapq.heappop(self.heap_)

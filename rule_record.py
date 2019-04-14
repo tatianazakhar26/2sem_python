@@ -1,11 +1,12 @@
 import tkinter
-from heap import *
+import heap
+import constants
 
-size_tk = '500x400+300+200'
 def Rules():
+    const = constants.Const()
     root_rule = tkinter.Tk()
-    root_rule.title("Rules of bulls and cows")
-    root_rule.geometry(size_tk)
+    root_rule.title(const.title + ": rules")
+    root_rule.geometry(const.size_tk)
     label_rule = tkinter.Label(root_rule, fg='black', font='arial 14', text='Быки '
             'и коровы — логическая игра, в ходе которой \nза несколько поп'
             'ыток один игрок должен определить,\n что задумал другой игрок.'
@@ -17,8 +18,9 @@ def Rules():
     label_rule.pack()
 
 def Records(records):
+    const = constants.Const()
     root_record = tkinter.Tk()
-    root_record.title("Rules of bulls and cows")
-    root_record.geometry(size_tk)
+    root_record.title(const.title +  ": records")
+    root_record.geometry(const.size_tk)
     label_record = tkinter.Label(root_record, fg='black', font='arial 14', text=records.__str__())
     label_record.pack()

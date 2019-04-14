@@ -8,6 +8,7 @@ def is_correct(number: int) -> bool:
     if number[0] == number[1]:
         return False
     return len(set(number)) == len(number)
+
 def first(n):
     if n == 1:
         return 1
@@ -15,11 +16,13 @@ def first(n):
     for i in range(2, n):
         fst = 10 * fst + i
     return fst
+
 def last(n):
     lst = 0
     for i in range(9, 9 - n, -1):
         lst = 10 * lst + i
     return lst
+
 def gen(bulls, cows, number, *sol):
     for secret in sol:
         num_bulls = 0
@@ -32,6 +35,7 @@ def gen(bulls, cows, number, *sol):
                 num_cows += 1
         if bulls == num_bulls and cows == num_cows:
             yield secret
+
 def ungame():
     messagebox.showinfo("Description: ungame", "You will be work with console")
     print('How much digits will be in number?')
@@ -39,13 +43,11 @@ def ungame():
     while n > 9 or n <= 0:
         print("It is too big, make new")
         n = int(input())
-    #t = time.time()
     sol = []
     if n == 1:
         sol = [str(i) for i in range(0, 10)]
     else:
         sol = [str(i) for i in range(first(n), last(n)) if is_correct(str(i))]
-    #print(time.time() - t)
     bulls = 0
     cows = 0
     while bulls != n and len(sol) > 0:
