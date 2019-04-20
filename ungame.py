@@ -25,14 +25,8 @@ def last(n):
 
 def gen(bulls, cows, number, *sol):
     for secret in sol:
-        num_bulls = 0
-        for j in range(len(secret)):
-            if secret[j] == number[j]:
-                num_bulls += 1
-        num_cows = 0 - num_bulls
-        for j in range(len(secret)):
-            if number.find(str(secret[j])) != -1:
-                num_cows += 1
+        num_bulls = sum([1 for i in range(len(secret)) if secret[i] == number[i]])
+        num_cows = sum([1 for d in secret if number.find(d) != -1]) - num_bulls
         if bulls == num_bulls and cows == num_cows:
             yield secret
 
