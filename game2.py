@@ -31,16 +31,10 @@ def count_of_animals(secret, number: str):
     except:
         raise Exception('It is not correct number')
     num_bulls = sum([1 for i in range(len(secret)) if secret[i] == number[i] ])
-    num_cows = 0 - num_bulls
-    for i in range(len(secret)):
-        if number.find(str(secret[i])) != -1:
-            num_cows += 1
+    num_cows = sum([1 for d in secret if number.find(d) != -1]) - num_bulls
     print('bulls:{}'.format(num_bulls))
     print('cows:{}'.format(num_cows))
-    if num_bulls == len(secret):
-        return True
-    else:
-        return False
+    return num_bulls == len(secret)
 
 class Game():
     def __init__(self):
@@ -53,12 +47,13 @@ class Game():
         while n > const.max_size:
             print("It is too big, make new")
             n = int(input())
-        secret = make_secret(n)
+        self.secret = make_secret(n)
+
+    def go(self):
         print('i made a number, what do you think?')
-        print(secret)
         number = input()
         self.attempt = 1
-        while not count_of_animals(secret, number):
+        while not count_of_animals(self.secret, number):
             print('What do you think now?')
             number = input()
             self.attempt += 1

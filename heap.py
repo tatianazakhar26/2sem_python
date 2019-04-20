@@ -7,6 +7,7 @@ class Heap:
 
     def game(self):
         game_ = game2.Game()
+        game_.go()
         record = game_.attempt
         name = game_.name
         heapq.heappush(self.heap_, (-record, name))
