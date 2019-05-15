@@ -47,11 +47,7 @@ def question(city, date):
     state = loc[0]["weather_state_name"]
     temp_min = loc[0]["min_temp"]
     temp_max = loc[0]["max_temp"]
-    # print(state)
     return state, temp_min, temp_max
-
-def fordg(msg_city, msg_date):
-    bot.reply_to(msg_date, 'State')
 
 
 def forecast(msg_city, msg_date):
